@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Rooms";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Rooms</h2>
+
+<table id="rooms" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Room</th>
+            <th>Capacity</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<button type="button" class="btn btn-primary mks-padding" onclick="location.href='@Url.Action("Create", "Rooms")'">
+    <span class="glyphicon glyphicon-plus"></span> New Room
+</button>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var table = $("#rooms").DataTable({
+                ajax: {
+                    url: "/api/rooms",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function (name, type, room) {
+                            return "<a href='/rooms/edit/" + room.id + "'>" + name + "</a>";
+                        }
+                    },
+                    {
+                        data: "capacity"
+                    }
+                ]
+            });
+        });
+    </script>
+}

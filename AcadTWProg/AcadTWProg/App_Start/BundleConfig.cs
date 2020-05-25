@@ -26,7 +26,8 @@ namespace AcadTWProg
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap-lumen.css",
+                      "~/Content/bootstrap.css",
+                      "~/Content/MyStyles/CSS.css",
                       "~/Content/DataTables/css/dataTables.bootstrap.css",
                       "~/Content/site.css"));
         }
