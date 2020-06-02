@@ -225,6 +225,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MeController.cs" />
     <Compile Include="Controllers\MyControllers\RoomsController.cs" />
+    <Compile Include="Controllers\MyControllers\ScheduleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -475,6 +476,7 @@
     <Content Include="Content\DataTables\css\common.scss" />
     <Content Include="Views\Rooms\Index.cshtml" />
     <Content Include="Views\Rooms\RoomForm.cshtml" />
+    <Content Include="Views\Schedule\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
