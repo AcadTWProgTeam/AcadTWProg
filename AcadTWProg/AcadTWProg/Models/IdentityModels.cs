@@ -25,6 +25,8 @@ namespace AcadTWProg.Models
     {
         public DbSet<Room> Rooms { get; set; }
 
+        public DbSet<Teacher> Teachers { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

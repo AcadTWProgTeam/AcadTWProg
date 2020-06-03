@@ -220,10 +220,12 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\TeachersController.cs" />
     <Compile Include="Controllers\Api\RoomsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MeController.cs" />
+    <Compile Include="Controllers\MyControllers\TeachersController.cs" />
     <Compile Include="Controllers\MyControllers\RoomsController.cs" />
     <Compile Include="Controllers\MyControllers\ScheduleController.cs" />
     <Compile Include="Global.asax.cs">
@@ -245,17 +247,24 @@
     <Compile Include="Migrations\202005251843571_AddingUniqueConstraintToRoomName.Designer.cs">
       <DependentUpon>202005251843571_AddingUniqueConstraintToRoomName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006030306282_AddTeachersModel.cs" />
+    <Compile Include="Migrations\202006030306282_AddTeachersModel.Designer.cs">
+      <DependentUpon>202006030306282_AddTeachersModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Dtos\TeacherDto.cs" />
     <Compile Include="Models\Dtos\RoomDto.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MeViewModels.cs" />
+    <Compile Include="Models\MyModels\Teacher.cs" />
     <Compile Include="Models\MyModels\Room.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\TeacherFormViewModel.cs" />
     <Compile Include="ViewModels\RoomFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -478,6 +487,8 @@
     <Content Include="Views\Rooms\Index.cshtml" />
     <Content Include="Views\Rooms\RoomForm.cshtml" />
     <Content Include="Views\Schedule\Index.cshtml" />
+    <Content Include="Views\Teachers\Index.cshtml" />
+    <Content Include="Views\Teachers\TeacherForm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -570,6 +581,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005251843571_AddingUniqueConstraintToRoomName.resx">
       <DependentUpon>202005251843571_AddingUniqueConstraintToRoomName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006030306282_AddTeachersModel.resx">
+      <DependentUpon>202006030306282_AddTeachersModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
