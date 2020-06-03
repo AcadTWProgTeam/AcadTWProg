@@ -1,0 +1,80 @@
+﻿@model AcadTWProg.ViewModels.CourseFormViewModel
+@{
+    ViewBag.Title = "Course Manager";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Title</h2>
+
+@using (Html.BeginForm("Save", "Courses"))
+{
+    <div class="form-group">
+        @Html.LabelFor(c => c.Code)
+        @Html.TextBoxFor(c => c.Code, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.Code)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.Name)
+        @Html.TextBoxFor(c => c.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.Name)
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2">
+            <div class="form-group">
+                @Html.LabelFor(c => c.Credits)
+                @Html.DropDownListFor(c => c.Credits,
+                                new SelectList(new List<int>() { 3, 4, 5, 6 }),
+                                "Select Credits",
+                                new { @class = "form-control" })
+                @Html.ValidationMessageFor(c => c.Credits)
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2">
+            <div class="form-group">
+                @Html.LabelFor(c => c.Hours)
+                @Html.DropDownListFor(c => c.Hours,
+                                new SelectList(new List<int>() { 2, 3, 4, 5, 6 }),
+                                "Select Hours",
+                                new { @class = "form-control" })
+                @Html.ValidationMessageFor(c => c.Hours)
+            </div>
+        </div>
+    </div>
+
+    @Html.HiddenFor(c => c.ID)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-success">
+        <span class="glyphicon glyphicon-edit"></span> Save
+    </button>
+    if (Model.IsEditMode)
+    {
+        <button type="button" class="btn btn-danger js-delete" data-movie-id="@Model.ID">
+            <span class="glyphicon glyphicon-remove"></span> Delete
+        </button>
+    }
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            $(this).on("click", ".js-delete", function () {
+                var button = $(this);
+
+                bootbox.confirm("Are you sure you want to delete this course ? This action cannot be undone !", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/Courses/" + button.attr("data-movie-id"),
+                            method: "DELETE",
+                            success: function () {
+                                window.location.replace("/Courses");
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}
