@@ -23,6 +23,10 @@ namespace AcadTWProg.App_Start
             Mapper.CreateMap<Course, CourseDto>();
             Mapper.CreateMap<CourseDto, Course>();
             Mapper.CreateMap<CourseDto, Course>().ForMember(c => c.ID, opt => opt.Ignore());
+
+            Mapper.CreateMap<Schedule, ScheduleDto>();
+            Mapper.CreateMap<ScheduleDto, Schedule>();
+            Mapper.CreateMap<ScheduleDto, Schedule>().ForMember(s => s.ID, opt => opt.Ignore());
         }
     }
 }
