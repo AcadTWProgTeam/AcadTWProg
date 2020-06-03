@@ -10,7 +10,6 @@ namespace AcadTWProg.ViewModels
 
         [Required]
         [StringLength(30)]
-        [Index(IsUnique = true)]
         public string Name { get; set; }
 
         public string Title { get { return ID == 0 ? "New Teacher" : "Edit"; } }

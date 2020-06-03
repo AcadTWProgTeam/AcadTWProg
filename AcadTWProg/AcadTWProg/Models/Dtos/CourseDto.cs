@@ -9,12 +9,10 @@ namespace AcadTWProg.Models.Dtos
 
         [Required]
         [StringLength(5)]
-        [Index(IsUnique = true)]
         public string Code { get; set; }
 
         [Required]
         [StringLength(20)]
-        [Index(IsUnique = true)]
         public string Name { get; set; }
 
         [Required]

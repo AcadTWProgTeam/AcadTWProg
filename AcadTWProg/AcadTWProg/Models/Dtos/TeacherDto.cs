@@ -9,7 +9,6 @@ namespace AcadTWProg.Models.Dtos
 
         [Required]
         [StringLength(30)]
-        [Index(IsUnique = true)]
         public string Name { get; set; }
     }
 }

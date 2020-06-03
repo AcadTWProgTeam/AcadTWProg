@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AcadTWProg.Models.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AcadTWProg.Models.MyModels
@@ -10,11 +11,13 @@ namespace AcadTWProg.Models.MyModels
         [Required]
         [StringLength(5)]
         [Index(IsUnique = true)]
+        [UniqueCourseCode]
         public string Code { get; set; }
 
         [Required]
         [StringLength(20)]
         [Index(IsUnique = true)]
+        [UniqueCourseName]
         public string Name { get; set; }
 
         [Required]
