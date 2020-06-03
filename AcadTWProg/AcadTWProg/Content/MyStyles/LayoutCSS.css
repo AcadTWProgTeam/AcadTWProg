@@ -1,0 +1,35 @@
+﻿.sidenav {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    left: 0;
+    background-color: #111;
+    border-color: #080808;
+    overflow-x: hidden;
+}
+
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #9d9d9d;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #222;
+    border-color: #080808;
+    align-content: center;
+}
+
+.footer-text {
+    padding-top: 1em;
+}

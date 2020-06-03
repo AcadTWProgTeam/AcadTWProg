@@ -11,7 +11,7 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header">
+            <div class="navbar-header" style="padding-left: 4em;">
                 @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
@@ -19,14 +19,30 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+
+    <div class="col-lg-2">
+        <div class="sidenav">
+            <ul class="list-unstyled components">
+                <li class="active">
+                    @Html.ActionLink("Rooms", "Index", "Rooms")
+                </li>
+                <li class="active">
+                    @Html.ActionLink("Schedule", "Index", "Schedule")
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-lg-10">
         @RenderBody()
         @RenderSection("SPAViews", required: false)
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Academic Teaching Weekly Program</p>
-        </footer>
     </div>
+
+    <footer class="footer">
+        <div class="footer-copyright text-center footer-text">
+            <p style="color:#9d9d9d">&copy; @DateTime.Now.Year - Academic Teaching Weekly Program</p>
+        </div>
+    </footer>
 
     @Scripts.Render("~/bundles/lib")
     @RenderSection("scripts", required: false)
