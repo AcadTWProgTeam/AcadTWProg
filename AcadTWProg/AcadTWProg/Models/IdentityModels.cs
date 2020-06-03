@@ -23,6 +23,8 @@ namespace AcadTWProg.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Department> Departments { get; set; }
+
         public DbSet<Room> Rooms { get; set; }
 
         public DbSet<Teacher> Teachers { get; set; }

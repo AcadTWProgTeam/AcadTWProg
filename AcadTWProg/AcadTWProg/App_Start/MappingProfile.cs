@@ -8,6 +8,10 @@ namespace AcadTWProg.App_Start
     {
         public MappingProfile()
         {
+            Mapper.CreateMap<Department, DepartmentDto>();
+            Mapper.CreateMap<DepartmentDto, Department>();
+            Mapper.CreateMap<DepartmentDto, Department>().ForMember(d => d.ID, opt => opt.Ignore());
+
             Mapper.CreateMap<Room, RoomDto>();
             Mapper.CreateMap<RoomDto, Room>();
             Mapper.CreateMap<RoomDto, Room>().ForMember(r => r.ID, opt => opt.Ignore());
