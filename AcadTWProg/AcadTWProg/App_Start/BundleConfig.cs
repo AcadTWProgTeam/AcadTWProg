@@ -27,7 +27,7 @@ namespace AcadTWProg
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/MyStyles/CSS.css",
+                      "~/Content/MyStyles/*.css",
                       "~/Content/DataTables/css/dataTables.bootstrap.css",
                       "~/Content/site.css"));
         }

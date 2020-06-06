@@ -23,7 +23,15 @@ namespace AcadTWProg.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Department> Departments { get; set; }
+
         public DbSet<Room> Rooms { get; set; }
+
+        public DbSet<Teacher> Teachers { get; set; }
+
+        public DbSet<Course> Courses { get; set; }
+
+        public DbSet<Schedule> Schedules { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

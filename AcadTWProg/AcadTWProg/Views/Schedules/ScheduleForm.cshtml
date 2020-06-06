@@ -1,0 +1,83 @@
+﻿@model AcadTWProg.ViewModels.ScheduleFormViewModel
+@{
+    ViewBag.Title = "Schedule Manager";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Title</h2>
+
+@using (Html.BeginForm("Save", "Schedules"))
+{
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+                @Html.LabelFor(s => s.Name)
+                @Html.TextBoxFor(s => s.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(s => s.Name)
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+                @Html.LabelFor(s => s.DepartmentId)
+                @Html.DropDownListFor(s => s.DepartmentId,
+                    new SelectList(Model.Departments, "Id", "Name"),
+                    "Select Department",
+                    new { @class = "form-control" })
+                @Html.ValidationMessageFor(s => s.DepartmentId)
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+                @Html.LabelFor(s => s.Semester)
+                @Html.DropDownListFor(s => s.Semester,
+                                        new SelectList(new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }),
+                                        "Select Semester",
+                                        new { @class = "form-control" })
+                @Html.ValidationMessageFor(s => s.Semester)
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(s => s.ID)
+    @Html.AntiForgeryToken()
+
+    <hr />
+
+    <h1>Insert Schedule Code Here</h1>
+
+    <hr />
+
+    <button type="submit" class="btn btn-success">
+        <span class="glyphicon glyphicon-edit"></span> Save
+    </button>
+    if (Model.IsEditMode)
+    {
+        <button type="button" class="btn btn-danger js-delete" data-movie-id="@Model.ID">
+            <span class="glyphicon glyphicon-remove"></span> Delete
+        </button>
+    }
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            $(this).on("click", ".js-delete", function () {
+                var button = $(this);
+
+                bootbox.confirm("Are you sure you want to delete this schedule ? This action cannot be undone !", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/Schedules/" + button.attr("data-movie-id"),
+                            method: "DELETE",
+                            success: function () {
+                                window.location.replace("/Schedules");
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

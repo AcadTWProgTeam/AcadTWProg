@@ -2,16 +2,12 @@
 
 namespace AcadTWProg.Models.Dtos
 {
-    public class RoomDto
+    public class DepartmentDto
     {
         public int ID { get; set; }
 
         [Required]
-        [StringLength(5)]
+        [StringLength(20)]
         public string Name { get; set; }
-
-        [Required]
-        [Range(10, 200)]
-        public int Capacity { get; set; }
     }
 }

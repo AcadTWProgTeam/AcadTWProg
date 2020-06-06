@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Teachers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <h2>Teachers</h2>
+
+<table id="teachers" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Teacher</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<button type="button" class="btn btn-primary mks-padding" onclick="location.href='@Url.Action("Create", "Teachers")'">
+    <span class="glyphicon glyphicon-plus"></span> New Teacher
+</button>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var table = $("#teachers").DataTable({
+                ajax: {
+                    url: "/api/teachers",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function (name, type, teacher) {
+                            return "<a href='/teachers/edit/" + teacher.id + "'>" + name + "</a>";
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+}

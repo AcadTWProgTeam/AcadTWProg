@@ -4,18 +4,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AcadTWProg.Models.MyModels
 {
-    public class Room
+    public class Teacher
     {
         public int ID { get; set; }
 
         [Required]
-        [StringLength(5)]
+        [StringLength(30)]
         [Index(IsUnique = true)]
-        [UniqueRoomName]
+        [UniqueTeacherName]
         public string Name { get; set; }
-
-        [Required]
-        [Range(10, 200)]
-        public int Capacity { get; set; }
     }
 }

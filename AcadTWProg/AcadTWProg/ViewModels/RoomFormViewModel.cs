@@ -1,4 +1,5 @@
 ﻿using AcadTWProg.Models.MyModels;
+using AcadTWProg.Models.Validation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -14,7 +15,6 @@ namespace AcadTWProg.ViewModels
 
         [Required]
         [StringLength(5)]
-        [Index(IsUnique = true)]
         public string Name { get; set; }
 
         [Required]
