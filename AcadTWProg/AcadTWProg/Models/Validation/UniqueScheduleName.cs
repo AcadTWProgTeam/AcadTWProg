@@ -11,7 +11,7 @@ namespace AcadTWProg.Models.Validation
             var schedule = (Schedule)validationContext.ObjectInstance;
             ApplicationDbContext _context = new ApplicationDbContext();
 
-            if (_context.Schedules.ToList().Any(s => s.Name == schedule.Name))
+            if (_context.Schedules.ToList().Any(s => s.Name == schedule.Name && s.ID != schedule.ID))
                 return new ValidationResult("Schedule name already exists");
             return ValidationResult.Success;
         }

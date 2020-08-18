@@ -12,7 +12,7 @@ namespace AcadTWProg.Models.Validation
             var room = (Room)validationContext.ObjectInstance;
             ApplicationDbContext _context = new ApplicationDbContext();
 
-            if (_context.Rooms.ToList().Any(r => r.Name == room.Name))
+            if (_context.Rooms.ToList().Any(r => r.Name == room.Name && r.ID != room.ID))
                 return new ValidationResult("Room already exists");
             return ValidationResult.Success;
         }

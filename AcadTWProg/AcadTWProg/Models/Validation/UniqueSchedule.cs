@@ -12,7 +12,8 @@ namespace AcadTWProg.Models.Validation
             ApplicationDbContext _context = new ApplicationDbContext();
 
             if (_context.Schedules.ToList().Any(s => s.DepartmentId == schedule.DepartmentId
-                                                    && s.Semester == schedule.Semester))
+                                                    && s.Semester == schedule.Semester
+                                                    && s.ID != schedule.ID))
                 return new ValidationResult("Schedule already exists");
             return ValidationResult.Success;
         }

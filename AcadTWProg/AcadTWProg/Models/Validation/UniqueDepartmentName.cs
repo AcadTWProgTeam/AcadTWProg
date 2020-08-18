@@ -11,7 +11,7 @@ namespace AcadTWProg.Models.Validation
             var department = (Department)validationContext.ObjectInstance;
             ApplicationDbContext _context = new ApplicationDbContext();
 
-            if (_context.Departments.ToList().Any(d => d.Name == department.Name))
+            if (_context.Departments.ToList().Any(d => d.Name == department.Name && d.ID != department.ID))
                 return new ValidationResult("Department already exists");
             return ValidationResult.Success;
         }

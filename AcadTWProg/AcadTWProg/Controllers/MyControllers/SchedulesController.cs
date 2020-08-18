@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace AcadTWProg.Controllers.MyControllers
 {
+    [Authorize]
     public class SchedulesController : Controller
     {
         private ApplicationDbContext _context;

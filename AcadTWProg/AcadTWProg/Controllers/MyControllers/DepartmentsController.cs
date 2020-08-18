@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace AcadTWProg.Controllers.MyControllers
 {
+    [Authorize]
     public class DepartmentsController : Controller
     {
         private ApplicationDbContext _context;

@@ -1,9 +1,28 @@
-﻿.sidenav {
+﻿:root {
+    --mks-border-style: 1px solid white;
+    --mks-header-bgcolor: #222;
+    --mks-sidenav-bgcolor: #111;
+    --mks-footer-bgcolor: #222;
+    --mks-header-color: #9d9d9d;
+    --mks-sidenav-color: #9d9d9d;
+    --mks-footer-color: #9d9d9d;
+}
+
+.header {
+    border-bottom: var(--mks-border-style);
+    background-color: var(--mks-header-bgcolor);
+}
+
+.navbar-brand {
+    color: var(--mks-header-color);
+}
+
+.sidenav {
     height: 100%;
     width: 180px;
     position: fixed;
     left: 0;
-    background-color: #111;
+    background-color: var(--mks-header-bgcolor);
     border-color: #080808;
     overflow-x: hidden;
 }
@@ -12,7 +31,7 @@
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 25px;
-    color: #9d9d9d;
+    color: var(--mks-sidenav-color);
     display: block;
 }
 
@@ -21,8 +40,8 @@
 }
 
 .active {
-    border-bottom: 1px solid white;
-    border-top: 1px solid white;
+    border-bottom: var(--mks-border-style);
+    border-top: var(--mks-border-style);
 }
 
 .active:hover {
@@ -34,9 +53,10 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: #222;
+    background-color: var(--mks-header-bgcolor);
     border-color: #080808;
     align-content: center;
+    border-top: var(--mks-border-style);
 }
 
 .footer-text {

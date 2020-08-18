@@ -12,7 +12,7 @@ namespace AcadTWProg.Models.Validation
             var course = (Course)validationContext.ObjectInstance;
             ApplicationDbContext _context = new ApplicationDbContext();
 
-            if (_context.Courses.ToList().Any(c => c.Code == course.Code))
+            if (_context.Courses.ToList().Any(c => c.Code == course.Code && c.ID != course.ID))
                 return new ValidationResult("Code already exists");
             return ValidationResult.Success;
         }

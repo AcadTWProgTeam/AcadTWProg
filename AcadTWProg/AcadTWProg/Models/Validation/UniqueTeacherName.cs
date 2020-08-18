@@ -12,7 +12,7 @@ namespace AcadTWProg.Models.Validation
             var teacher = (Teacher)validationContext.ObjectInstance;
             ApplicationDbContext _context = new ApplicationDbContext();
 
-            if (_context.Teachers.ToList().Any(t => t.Name == teacher.Name))
+            if (_context.Teachers.ToList().Any(t => t.Name == teacher.Name && t.ID != teacher.ID))
                 return new ValidationResult("Teacher already exists");
             return ValidationResult.Success;
         }

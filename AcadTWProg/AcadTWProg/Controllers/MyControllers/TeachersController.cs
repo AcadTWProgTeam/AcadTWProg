@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace AcadTWProg.Controllers.MyControllers
 {
+    [Authorize]
     public class TeachersController : Controller
     {
         private ApplicationDbContext _context;
