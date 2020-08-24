@@ -20,12 +20,17 @@ namespace AcadTWProg.Models.MyModels
         [UniqueCourseName]
         public string Name { get; set; }
 
+        public Department Department { get; set; }
+
+        [Required]
+        [Display(Name = "Department")]
+        public int DepartmentId { get; set; }
+
         [Required]
         [Range(3, 6)]
         public int Credits { get; set; }
 
         [Required]
-        [Range(2, 6)]
-        public int Hours { get; set; }
+        public float Hours { get; set; }
     }
 }

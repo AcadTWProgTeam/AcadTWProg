@@ -29,9 +29,13 @@ namespace AcadTWProg.Controllers.MyControllers
         public ActionResult Create()
         {
             var departments = _context.Departments.ToList();
+            var courses = _context.Courses.ToList();
+            var teachers = _context.Teachers.ToList();
             var scheduleFormViewModel = new ScheduleFormViewModel()
             {
-                Departments = departments
+                Departments = departments,
+                Courses = courses,
+                Teachers = teachers
             };
             return View("ScheduleForm", scheduleFormViewModel);
         }
@@ -43,9 +47,13 @@ namespace AcadTWProg.Controllers.MyControllers
                 return HttpNotFound();
 
             var departments = _context.Departments.ToList();
+            var courses = _context.Courses.ToList();
+            var teachers = _context.Teachers.ToList();
             var scheduleFormViewModel = new ScheduleFormViewModel(schedule)
             {
-                Departments = departments
+                Departments = departments,
+                Courses = courses,
+                Teachers = teachers
             };
             return View("ScheduleForm", scheduleFormViewModel);
         }
@@ -57,9 +65,13 @@ namespace AcadTWProg.Controllers.MyControllers
             if (!ModelState.IsValid)
             {
                 var departments = _context.Departments.ToList();
+                var courses = _context.Courses.ToList();
+                var teachers = _context.Teachers.ToList();
                 var scheduleFormViewModel = new ScheduleFormViewModel(schedule)
                 {
-                    Departments = departments
+                    Departments = departments,
+                    Courses = courses,
+                    Teachers = teachers
                 };
 
                 return View("ScheduleForm", scheduleFormViewModel);

@@ -24,5 +24,20 @@ namespace AcadTWProg.Models.MyModels
         [Range(1, 10)]
         [UniqueSchedule]
         public int Semester { get; set; }
+
+        public string ScheduleData { get; set; }
+    }
+
+    public class ScheduleData
+    {
+        public int Day { get; set; }
+
+        public int Time { get; set; }
+
+        public int ColSpan { get; set; }
+
+        public string Code { get; set; }
+
+        public string TeacherName { get; set; }
     }
 }

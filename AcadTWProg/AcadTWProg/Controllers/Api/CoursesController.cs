@@ -5,6 +5,8 @@ using AutoMapper;
 using System;
 using System.Linq;
 using System.Web.Http;
+using System.Data.Entity;
+using System.Collections.Generic;
 
 namespace AcadTWProg.Controllers.Api
 {
@@ -25,7 +27,24 @@ namespace AcadTWProg.Controllers.Api
         // GET /api/courses
         public IHttpActionResult GetCourses()
         {
-            return Ok(_context.Courses.ToList()
+            return Ok(_context.Courses
+                .Include(c => c.Department)
+                .ToList()
+                .Select(Mapper.Map<Course, CourseDto>));
+        }
+
+        [Route("api/Courses/GetAllCourses")]
+        public List<Course> GetAllCourses()
+        {
+            return _context.Courses.ToList();
+        }
+
+        public IHttpActionResult GetCourses(int departmentId)
+        {
+            return Ok(_context.Courses
+                .Include(c => c.Department)
+                .Where(c => c.DepartmentId == departmentId)
+                .ToList()
                 .Select(Mapper.Map<Course, CourseDto>));
         }
 

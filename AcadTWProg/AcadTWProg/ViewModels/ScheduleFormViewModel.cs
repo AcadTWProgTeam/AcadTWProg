@@ -18,9 +18,15 @@ namespace AcadTWProg.ViewModels
 
         public IEnumerable<Department> Departments { get; set; }
 
+        public IEnumerable<Course> Courses { get; set; }
+
+        public IEnumerable<Teacher> Teachers { get; set; }
+
         [Required]
         [Range(1, 10)]
         public int? Semester { get; set; }
+
+        public string ScheduleData { get; set; }
 
         public string Title { get { return ID == 0 ? "New Schedule" : "Edit"; } }
 
@@ -37,6 +43,7 @@ namespace AcadTWProg.ViewModels
             Name = schedule.Name;
             DepartmentId = schedule.DepartmentId;
             Semester = schedule.Semester;
+            ScheduleData = schedule.ScheduleData;
         }
     }
 }

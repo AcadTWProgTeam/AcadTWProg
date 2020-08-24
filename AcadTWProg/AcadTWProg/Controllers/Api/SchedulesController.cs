@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Data.Entity;
 using System.Web.Http;
+using System.Collections.Generic;
 
 namespace AcadTWProg.Controllers.Api
 {
@@ -57,19 +58,41 @@ namespace AcadTWProg.Controllers.Api
             return Created(new Uri(Request.RequestUri + "/" + schedule.Name), scheduleDto);
         }
 
-        // PUT /api/schedules/1
-        [HttpPut]
-        public IHttpActionResult UpdateSchedule(int id, ScheduleDto scheduleDto)
+        // POST /api/schedules?id=1&scheduleAsString=zzz
+        [HttpPost]
+        public IHttpActionResult UpdateSchedule(int id, string scheduleAsString)
         {
-            if (!ModelState.IsValid)
-                return BadRequest();
+            List<ScheduleData> scheduleDataList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ScheduleData>>(scheduleAsString);
 
-            var scheduleInDb = _context.Schedules.SingleOrDefault(c => c.ID == id);
+            Dictionary<string, int> colspanByCode = new Dictionary<string, int>();
+            foreach (var scheduleData in scheduleDataList)
+            {
+                if (!colspanByCode.ContainsKey(scheduleData.Code))
+                    colspanByCode[scheduleData.Code] = 0;
+                colspanByCode[scheduleData.Code] += scheduleData.ColSpan;
+            }
+
+            CoursesController coursesController = new CoursesController();
+            List<Course> courses = coursesController.GetAllCourses();
+
+            foreach (var kvp in colspanByCode)
+            {
+                string code = kvp.Key;
+                int colspan = kvp.Value;
+                float hours = 1f * colspan / 2f;
+
+                Course course = courses.FirstOrDefault(c => c.Code == code);
+                if (course == null || course.Hours != hours)
+                    return BadRequest();
+            }
+
+            var scheduleInDb = _context.Schedules.SingleOrDefault(s => s.ID == id);
             if (scheduleInDb == null)
                 return NotFound();
 
-            Mapper.Map(scheduleDto, scheduleInDb);
+            scheduleInDb.ScheduleData = scheduleAsString;
             _context.SaveChanges();
+
             return Ok();
         }
 

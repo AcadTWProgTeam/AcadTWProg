@@ -15,12 +15,16 @@ namespace AcadTWProg.Models.Dtos
         [StringLength(20)]
         public string Name { get; set; }
 
+        public DepartmentDto Department { get; set; }
+
+        [Required]
+        public int DepartmentId { get; set; }
+
         [Required]
         [Range(3, 6)]
         public int Credits { get; set; }
 
         [Required]
-        [Range(2, 6)]
-        public int Hours { get; set; }
+        public float Hours { get; set; }
     }
 }

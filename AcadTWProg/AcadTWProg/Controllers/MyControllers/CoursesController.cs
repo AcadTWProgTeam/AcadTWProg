@@ -31,7 +31,11 @@ namespace AcadTWProg.Controllers.MyControllers
 
         public ActionResult Create()
         {
-            var viewModel = new CourseFormViewModel();
+            var departments = _context.Departments.ToList();
+            var viewModel = new CourseFormViewModel()
+            {
+                Departments = departments
+            };
             return View("CourseForm", viewModel);
         }
 
@@ -41,7 +45,11 @@ namespace AcadTWProg.Controllers.MyControllers
             if (course == null)
                 return HttpNotFound();
 
-            var viewModel = new CourseFormViewModel(course);
+            var departments = _context.Departments.ToList();
+            var viewModel = new CourseFormViewModel(course)
+            {
+                Departments = departments
+            };
             return View("CourseForm", viewModel);
         }
 
@@ -51,7 +59,11 @@ namespace AcadTWProg.Controllers.MyControllers
         {
             if (!ModelState.IsValid)
             {
-                var viewModel = new CourseFormViewModel(course);
+                var departments = _context.Departments.ToList();
+                var viewModel = new CourseFormViewModel(course)
+                {
+                    Departments = departments
+                };
 
                 return View("CourseForm", viewModel);
             }
@@ -63,6 +75,7 @@ namespace AcadTWProg.Controllers.MyControllers
                 var courseInDb = _context.Courses.Single(c => c.ID == course.ID);
                 courseInDb.Code = course.Code;
                 courseInDb.Name = course.Name;
+                courseInDb.DepartmentId = course.DepartmentId;
                 courseInDb.Credits = course.Credits;
                 courseInDb.Hours = course.Hours;
             }

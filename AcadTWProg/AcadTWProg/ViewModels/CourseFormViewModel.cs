@@ -1,4 +1,5 @@
 ﻿using AcadTWProg.Models.MyModels;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,12 +18,17 @@ namespace AcadTWProg.ViewModels
         public string Name { get; set; }
 
         [Required]
+        [Display(Name = "Department")]
+        public int? DepartmentId { get; set; }
+
+        public IEnumerable<Department> Departments { get; set; }
+
+        [Required]
         [Range(3, 6)]
         public int Credits { get; set; }
 
         [Required]
-        [Range(2, 6)]
-        public int Hours { get; set; }
+        public float Hours { get; set; }
 
         public string Title { get { return ID == 0 ? "New Course" : "Edit"; } }
 
@@ -38,6 +44,7 @@ namespace AcadTWProg.ViewModels
             ID = course.ID;
             Code = course.Code;
             Name = course.Name;
+            DepartmentId = course.DepartmentId;
             Credits = course.Credits;
             Hours = course.Hours;
         }

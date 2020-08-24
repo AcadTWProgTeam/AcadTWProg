@@ -18,6 +18,14 @@
         @Html.TextBoxFor(c => c.Name, new { @class = "form-control" })
         @Html.ValidationMessageFor(c => c.Name)
     </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.DepartmentId)
+        @Html.DropDownListFor(c => c.DepartmentId,
+            new SelectList(Model.Departments, "Id", "Name"),
+            "Select Department",
+            new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.DepartmentId)
+    </div>
     <div class="row">
         <div class="col-lg-2 col-md-2 col-sm-2">
             <div class="form-group">
@@ -33,7 +41,7 @@
             <div class="form-group">
                 @Html.LabelFor(c => c.Hours)
                 @Html.DropDownListFor(c => c.Hours,
-                                new SelectList(new List<int>() { 2, 3, 4, 5, 6 }),
+                                new SelectList(new List<float>() { 2, 2.5f, 3, 3.5f, 4, 4.5f, 5, 5.5f, 6 }),
                                 "Select Hours",
                                 new { @class = "form-control" })
                 @Html.ValidationMessageFor(c => c.Hours)
