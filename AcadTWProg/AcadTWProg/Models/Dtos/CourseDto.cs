@@ -26,5 +26,8 @@ namespace AcadTWProg.Models.Dtos
 
         [Required]
         public float Hours { get; set; }
+
+        [Required]
+        public int Semester { get; set; }
     }
 }

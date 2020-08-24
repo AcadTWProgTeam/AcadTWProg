@@ -32,5 +32,8 @@ namespace AcadTWProg.Models.MyModels
 
         [Required]
         public float Hours { get; set; }
+
+        [Required]
+        public int Semester { get; set; }
     }
 }

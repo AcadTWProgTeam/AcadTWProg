@@ -78,6 +78,7 @@ namespace AcadTWProg.Controllers.MyControllers
                 courseInDb.DepartmentId = course.DepartmentId;
                 courseInDb.Credits = course.Credits;
                 courseInDb.Hours = course.Hours;
+                courseInDb.Semester = course.Semester;
             }
             _context.SaveChanges();
             return RedirectToAction("Index", "Courses");

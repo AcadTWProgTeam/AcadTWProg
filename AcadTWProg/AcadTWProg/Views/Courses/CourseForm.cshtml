@@ -47,6 +47,17 @@
                 @Html.ValidationMessageFor(c => c.Hours)
             </div>
         </div>
+
+        <div class="col-lg-2 col-md-2 col-sm-2">
+            <div class="form-group">
+                @Html.LabelFor(c => c.Semester)
+                @Html.DropDownListFor(c => c.Semester,
+                                new SelectList(new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }),
+                                "Select Semester",
+                                new { @class = "form-control" })
+                @Html.ValidationMessageFor(c => c.Semester)
+            </div>
+        </div>
     </div>
 
     @Html.HiddenFor(c => c.ID)

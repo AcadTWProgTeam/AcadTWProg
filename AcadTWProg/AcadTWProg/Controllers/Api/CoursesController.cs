@@ -39,11 +39,11 @@ namespace AcadTWProg.Controllers.Api
             return _context.Courses.ToList();
         }
 
-        public IHttpActionResult GetCourses(int departmentId)
+        public IHttpActionResult GetCourses(int departmentId, int semester)
         {
             return Ok(_context.Courses
                 .Include(c => c.Department)
-                .Where(c => c.DepartmentId == departmentId)
+                .Where(c => c.DepartmentId == departmentId && c.Semester == semester)
                 .ToList()
                 .Select(Mapper.Map<Course, CourseDto>));
         }

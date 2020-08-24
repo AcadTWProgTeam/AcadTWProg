@@ -30,6 +30,9 @@ namespace AcadTWProg.ViewModels
         [Required]
         public float Hours { get; set; }
 
+        [Required]
+        public int Semester { get; set; }
+
         public string Title { get { return ID == 0 ? "New Course" : "Edit"; } }
 
         public bool IsEditMode { get { return ID != 0; } }
@@ -47,6 +50,7 @@ namespace AcadTWProg.ViewModels
             DepartmentId = course.DepartmentId;
             Credits = course.Credits;
             Hours = course.Hours;
+            Semester = course.Semester;
         }
     }
 }
