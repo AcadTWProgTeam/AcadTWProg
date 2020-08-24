@@ -13,9 +13,12 @@
         @{ string colClass = "col-lg-12"; }
         <div class="navbar navbar-inverse navbar-fixed-top header">
             <div class="container">
-                <div class="navbar-header" style="padding-left: 5em;">
-                    @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
+                @if (Request.IsAuthenticated)
+                {
+                    <div class="navbar-header" style="padding-left: 5em;">
+                        @Html.ActionLink(AcadTWProg.ViewModels.AccountViewModel.GetDepartmentName(), "Index", "Schedules", new { area = "" }, new { @class = "navbar-brand" })
+                    </div>
+                }
                 <div class="navbar-collapse collapse">
                     @Html.Partial("_LoginPartial")
                 </div>
@@ -25,8 +28,8 @@
         @if (Request.IsAuthenticated)
         {
             colClass = "col-lg-10";
-            <div class="col-lg-2">
-                <div class="sidenav">
+            <div class="col-lg-1">
+                @*<div class="sidenav">
                     <ul class="list-unstyled components">
                         <li class="active">@Html.ActionLink("Departments", "Index", "Departments")</li>
                         <li class="active">@Html.ActionLink("Rooms", "Index", "Rooms")</li>
@@ -34,7 +37,7 @@
                         <li class="active">@Html.ActionLink("Courses", "Index", "Courses")</li>
                         <li class="active">@Html.ActionLink("Schedules", "Index", "Schedules")</li>
                     </ul>
-                </div>
+                </div>*@
             </div>
         }
         <div class="@colClass">

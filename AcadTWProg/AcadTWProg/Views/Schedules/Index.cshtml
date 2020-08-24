@@ -27,7 +27,7 @@
         $(document).ready(function () {
             var table = $("#schedules").DataTable({
                 ajax: {
-                    url: "/api/schedules",
+                    url: "/api/Schedules/GetSchedules/" + @ViewBag.DepartmentId,
                     dataSrc: ""
                 },
                 columns: [

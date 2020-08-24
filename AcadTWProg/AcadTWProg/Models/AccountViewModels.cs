@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AcadTWProg.Models.MyModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -87,6 +88,12 @@ namespace AcadTWProg.Models
 
         [Display(Name = "Hometown")]
         public string Hometown { get; set; }
+
+        [Required]
+        [Display(Name = "Department")]
+        public int DepartmentId { get; set; }
+
+        public IEnumerable<Department> Departments { get; set; }
     }
 
     public class ResetPasswordViewModel

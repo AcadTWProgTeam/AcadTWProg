@@ -1,6 +1,8 @@
 ﻿using AcadTWProg.Models;
 using AcadTWProg.Models.MyModels;
 using AcadTWProg.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -10,10 +12,12 @@ namespace AcadTWProg.Controllers.MyControllers
     public class SchedulesController : Controller
     {
         private ApplicationDbContext _context;
+        private UserManager<ApplicationUser> _userManager;
 
         public SchedulesController()
         {
             _context = new ApplicationDbContext();
+            _userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_context));
         }
 
         protected override void Dispose(bool disposing)
@@ -23,6 +27,8 @@ namespace AcadTWProg.Controllers.MyControllers
 
         public ActionResult Index()
         {
+            ApplicationUser user = _userManager.FindById(User.Identity.GetUserId());
+            ViewBag.DepartmentId = user.DepartmentId;
             return View();
         }
 

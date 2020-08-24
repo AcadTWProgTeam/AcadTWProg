@@ -33,6 +33,16 @@ namespace AcadTWProg.Controllers.Api
                 .Select(Mapper.Map<Schedule, ScheduleDto>));
         }
 
+        [Route("api/Schedules/GetSchedules/{id}")]
+        public IHttpActionResult GetSchedules(int id)
+        {
+            return Ok(_context.Schedules
+                .Include(s => s.Department)
+                .Where(s => s.DepartmentId == id)
+                .ToList()
+                .Select(Mapper.Map<Schedule, ScheduleDto>));
+        }
+
         // GET /api/schedules/1
         public IHttpActionResult GetSchedule(int id)
         {
