@@ -11,7 +11,7 @@ namespace AcadTWProg.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Home";
-            return View();
+            return Redirect("Schedules");
         }
     }
 }
