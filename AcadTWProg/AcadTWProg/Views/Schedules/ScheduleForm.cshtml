@@ -211,7 +211,8 @@
                         ColSpan: parseInt(colspan, 10),
                         Code: code,
                         TeacherName: teacherName,
-                        Room: room
+                        Room: room,
+                        ScheduleId: model.ID
                     };
                     scheduleMatrix.push(object);
                 }
@@ -231,6 +232,8 @@
 
             $("#departmentsDropDownList").ready(loadCoursesDropDownList);
             $("#departmentsDropDownList").change(loadCoursesDropDownList);
+
+            $("#roomsDropDownList").change(loadRoomInfos);
         });
 
         function loadCoursesDropDownList() {
@@ -275,6 +278,22 @@
                     otherCell.textContent = "";
                 }
             }
+        }
+
+        function loadRoomInfos() {
+            $.ajax({
+                url: "/api/ScheduleDatas/GetRoomInfos?room=" + $("#roomsDropDownList").val(),
+                method: "GET",
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var colSpan = data[i].colSpan;
+                        var time = data[i].time;
+                        var day = data[i].day;
+
+
+                    }
+                }
+            });
         }
 
         function deleteCells() {

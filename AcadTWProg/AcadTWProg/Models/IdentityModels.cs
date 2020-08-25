@@ -40,6 +40,8 @@ namespace AcadTWProg.Models
 
         public DbSet<Schedule> Schedules { get; set; }
 
+        public DbSet<ScheduleData> ScheduleDatas { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

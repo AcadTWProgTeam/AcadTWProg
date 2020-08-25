@@ -90,7 +90,9 @@ namespace AcadTWProg.Controllers.MyControllers
             }
 
             if (schedule.ID == 0)
+            {
                 _context.Schedules.Add(schedule);
+            }
             else
             {
                 var scheduleInDb = _context.Schedules.Single(c => c.ID == schedule.ID);
@@ -98,6 +100,7 @@ namespace AcadTWProg.Controllers.MyControllers
                 scheduleInDb.DepartmentId = schedule.DepartmentId;
                 scheduleInDb.Semester = schedule.Semester;
             }
+
             _context.SaveChanges();
             return RedirectToAction("Index", "Schedules");
         }

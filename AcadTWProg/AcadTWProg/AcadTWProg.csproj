@@ -222,6 +222,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\CoursesController.cs" />
     <Compile Include="Controllers\Api\DepartmentsController.cs" />
+    <Compile Include="Controllers\Api\ScheduleDatasController.cs" />
     <Compile Include="Controllers\Api\SchedulesController.cs" />
     <Compile Include="Controllers\Api\TeachersController.cs" />
     <Compile Include="Controllers\Api\RoomsController.cs" />
@@ -288,6 +289,10 @@
     <Compile Include="Migrations\202008242032200_AddSemesterColumnToCoursesTable.Designer.cs">
       <DependentUpon>202008242032200_AddSemesterColumnToCoursesTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008251802033_AddingScheduleDatasTable.cs" />
+    <Compile Include="Migrations\202008251802033_AddingScheduleDatasTable.Designer.cs">
+      <DependentUpon>202008251802033_AddingScheduleDatasTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Dtos\DepartmentDto.cs" />
@@ -301,6 +306,7 @@
     <Compile Include="Models\MyModels\Course.cs" />
     <Compile Include="Models\MyModels\Department.cs" />
     <Compile Include="Models\MyModels\Schedule.cs" />
+    <Compile Include="Models\MyModels\ScheduleData.cs" />
     <Compile Include="Models\MyModels\Teacher.cs" />
     <Compile Include="Models\MyModels\Room.cs" />
     <Compile Include="Models\Validation\UniqueCourseName.cs" />
@@ -667,6 +673,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008242032200_AddSemesterColumnToCoursesTable.resx">
       <DependentUpon>202008242032200_AddSemesterColumnToCoursesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008251802033_AddingScheduleDatasTable.resx">
+      <DependentUpon>202008251802033_AddingScheduleDatasTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
