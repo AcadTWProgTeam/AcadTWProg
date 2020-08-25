@@ -119,7 +119,7 @@
     <br />
 
     <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-3">
+        <div class="col-lg-2 col-md-2 col-sm-2">
             <div class="form-group">
                 @Html.DropDownList("courses",
                     new SelectList(Model.Courses, "Id", "Code"),
@@ -127,12 +127,20 @@
                     new { @class = "form-control", @id = "coursesDropDownList" })
             </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-3">
+        <div class="col-lg-2 col-md-2 col-sm-2">
             <div class="form-group">
                 @Html.DropDownList("teachers",
                     new SelectList(Model.Teachers, "Name", "Name"),
                     null,
                     new { @class = "form-control", @id = "teachersDropDownList" })
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2">
+            <div class="form-group">
+                @Html.DropDownList("rooms",
+                    new SelectList(Model.Rooms, "Name", "Name"),
+                    null,
+                    new { @class = "form-control", @id = "roomsDropDownList" })
             </div>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2">
@@ -192,16 +200,18 @@
                     if (colspan == undefined)
                         continue;
 
-                    var infos = $('#' + i).html().split(" (");
+                    var infos = $('#' + i).html().split(", ");
                     var code = infos[0];
-                    var teacherName = infos[1].substr(0, infos[1].length - 1);
+                    var teacherName = infos[1];
+                    var room = infos[2];
 
                     var object = {
                         Day: Math.floor(i / timesCount),
                         Time: i % timesCount,
                         ColSpan: parseInt(colspan, 10),
                         Code: code,
-                        TeacherName: teacherName
+                        TeacherName: teacherName,
+                        Room: room
                     };
                     scheduleMatrix.push(object);
                 }
@@ -250,10 +260,11 @@
                 var colspan = scheduleData.ColSpan;
                 var code = scheduleData.Code;
                 var teacherName = scheduleData.TeacherName;
+                var room = scheduleData.Room;
 
                 var firstCell = document.getElementById(id);
                 firstCell.colSpan = colspan;
-                firstCell.textContent = code + ' (' + teacherName + ')';
+                firstCell.textContent = code + ', ' + teacherName + ', ' + room;
                 firstCell.style.color = 'white';
                 firstCell.style.fontWeight = 'bold';
                 firstCell.style.backgroundColor = "green";
@@ -353,7 +364,7 @@
             }
 
             var firstCell = document.getElementById(firstCellId);
-            firstCell.textContent = $("#coursesDropDownList").val() + ' (' + $("#teachersDropDownList").val() + ')';
+            firstCell.textContent = $("#coursesDropDownList").val() + ', ' + $("#teachersDropDownList").val() + ', ' + $("#roomsDropDownList").val();
             firstCell.style.color = 'white';
             firstCell.style.fontWeight = 'bold';
             firstCell.style.backgroundColor = "green";

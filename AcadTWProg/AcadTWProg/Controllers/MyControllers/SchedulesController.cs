@@ -37,11 +37,13 @@ namespace AcadTWProg.Controllers.MyControllers
             var departments = _context.Departments.ToList();
             var courses = _context.Courses.ToList();
             var teachers = _context.Teachers.ToList();
+            var rooms = _context.Rooms.ToList();
             var scheduleFormViewModel = new ScheduleFormViewModel()
             {
                 Departments = departments,
                 Courses = courses,
-                Teachers = teachers
+                Teachers = teachers,
+                Rooms = rooms
             };
             return View("ScheduleForm", scheduleFormViewModel);
         }
@@ -55,11 +57,13 @@ namespace AcadTWProg.Controllers.MyControllers
             var departments = _context.Departments.ToList();
             var courses = _context.Courses.ToList();
             var teachers = _context.Teachers.ToList();
+            var rooms = _context.Rooms.ToList();
             var scheduleFormViewModel = new ScheduleFormViewModel(schedule)
             {
                 Departments = departments,
                 Courses = courses,
-                Teachers = teachers
+                Teachers = teachers,
+                Rooms = rooms
             };
             return View("ScheduleForm", scheduleFormViewModel);
         }
@@ -73,11 +77,13 @@ namespace AcadTWProg.Controllers.MyControllers
                 var departments = _context.Departments.ToList();
                 var courses = _context.Courses.ToList();
                 var teachers = _context.Teachers.ToList();
+                var rooms = _context.Rooms.ToList();
                 var scheduleFormViewModel = new ScheduleFormViewModel(schedule)
                 {
                     Departments = departments,
                     Courses = courses,
-                    Teachers = teachers
+                    Teachers = teachers,
+                    Rooms = rooms
                 };
 
                 return View("ScheduleForm", scheduleFormViewModel);

@@ -39,5 +39,7 @@ namespace AcadTWProg.Models.MyModels
         public string Code { get; set; }
 
         public string TeacherName { get; set; }
+
+        public string Room { get; set; }
     }
 }

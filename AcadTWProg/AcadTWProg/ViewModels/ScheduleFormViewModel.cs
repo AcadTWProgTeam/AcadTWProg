@@ -22,6 +22,8 @@ namespace AcadTWProg.ViewModels
 
         public IEnumerable<Teacher> Teachers { get; set; }
 
+        public IEnumerable<Room> Rooms { get; set; }
+
         [Required]
         [Range(1, 10)]
         public int? Semester { get; set; }
