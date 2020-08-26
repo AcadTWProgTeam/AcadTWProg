@@ -99,6 +99,7 @@ namespace AcadTWProg.Controllers.Api
             var scheduleInDb = _context.Schedules.SingleOrDefault(s => s.ID == id);
             if (scheduleInDb == null)
                 return NotFound();
+            scheduleInDb.ScheduleData = scheduleAsString;
 
             var scheduleDatasToRemove = _context.ScheduleDatas.ToList().FindAll(s => s.ScheduleId == id);
             foreach (var scheduleData in scheduleDatasToRemove)
