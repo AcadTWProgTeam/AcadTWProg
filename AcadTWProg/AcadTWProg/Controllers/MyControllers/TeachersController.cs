@@ -29,6 +29,16 @@ namespace AcadTWProg.Controllers.MyControllers
             return View();
         }
 
+        public ActionResult TeacherView(int id)
+        {
+            var teacher = _context.Teachers.SingleOrDefault(t => t.ID == id);
+            if (teacher == null)
+                return HttpNotFound();
+
+            var viewModel = new TeacherFormViewModel(teacher);
+            return View("View", viewModel);
+        }
+
         public ActionResult Create()
         {
             var viewModel = new TeacherFormViewModel();

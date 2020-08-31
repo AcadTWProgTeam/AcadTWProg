@@ -1,6 +1,6 @@
-﻿@model AcadTWProg.ViewModels.RoomFormViewModel
+﻿@model AcadTWProg.ViewModels.TeacherFormViewModel
 @{
-    ViewBag.Title = "Room Manager";
+    ViewBag.Title = "Teacher Manager";
     Layout = "~/Views/Shared/_Layout.cshtml";
     List<string> times = new List<string>() { "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "1:00", "1:30", "2:00", "2:30", "3:00", "3:30", "4:00", "4:30", "5:00" };//, "5:30", "6:00", "6:30", "7:00", "7:30", "8:00" };
     List<string> days = new List<string>() { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
@@ -14,16 +14,16 @@
 
     <script>
         $(document).ready(function () {
-            loadRoomInfos();
+            loadTeacherInfos();
         });
 
-        function loadRoomInfos() {
+        function loadTeacherInfos() {
             var model = @Html.Raw(Json.Encode(Model));
             var timesCount = @times.Count;
             var daysCount = @days.Count;
 
             $.ajax({
-                url: "/api/ScheduleDatas/GetRoomInfos?room=" + model.Name,
+                url: "/api/ScheduleDatas/GetTeacherInfos?teacher=" + model.Name,
                 method: "GET",
                 success: function (data) {
                     console.log(data);

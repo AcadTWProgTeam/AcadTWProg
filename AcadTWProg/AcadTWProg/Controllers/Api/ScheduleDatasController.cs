@@ -31,5 +31,13 @@ namespace AcadTWProg.Controllers.Api
             var roomInfos = _context.ScheduleDatas.ToList().FindAll(s => s.Room == room).ToList();
             return Ok(roomInfos);
         }
+
+        //api/ScheduleDatas/GetTeacherInfos?teacher=zzz
+        public IHttpActionResult GetTeacherInfos(string teacher)
+        {
+            var all = _context.ScheduleDatas.ToList();
+            var teacherInfos = _context.ScheduleDatas.ToList().FindAll(s => s.TeacherName == teacher).ToList();
+            return Ok(teacherInfos);
+        }
     }
 }
