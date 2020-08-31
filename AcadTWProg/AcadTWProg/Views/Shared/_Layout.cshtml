@@ -15,8 +15,11 @@
             <div class="container">
                 @if (Request.IsAuthenticated)
                 {
-                    <div class="navbar-header" style="padding-left: 5em;">
+                    <div class="navbar-header" style="padding-left: 2em;">
                         @Html.ActionLink(AcadTWProg.ViewModels.AccountViewModel.GetDepartmentName(), "Index", "Schedules", new { area = "" }, new { @class = "navbar-brand" })
+                    </div>
+                    <div class="navbar-header" style="padding-left: 2em;">
+                        @Html.ActionLink("Rooms", "Index", "Rooms", new { area = "" }, new { @class = "navbar-brand" })
                     </div>
                 }
                 <div class="navbar-collapse collapse">

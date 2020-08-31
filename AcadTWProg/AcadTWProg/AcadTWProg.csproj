@@ -554,6 +554,7 @@
     <Content Include="Views\Departments\DepartmentForm.cshtml" />
     <Content Include="Views\Schedules\ScheduleForm.cshtml" />
     <Content Include="Views\Schedules\Index.cshtml" />
+    <Content Include="Views\Rooms\View.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -29,6 +29,16 @@ namespace AcadTWProg.Controllers.MyControllers
             return View();
         }
 
+        public ActionResult RoomView(int id)
+        {
+            var room = _context.Rooms.SingleOrDefault(c => c.ID == id);
+            if (room == null)
+                return HttpNotFound();
+
+            var viewModel = new RoomFormViewModel(room);
+            return View("View", viewModel);
+        }
+
         public ActionResult Create()
         {
             var viewModel = new RoomFormViewModel();

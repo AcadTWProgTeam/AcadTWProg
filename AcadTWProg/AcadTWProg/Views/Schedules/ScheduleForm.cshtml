@@ -12,7 +12,7 @@
         border-collapse: collapse;
     }
 
-    tables {
+    /*tables {
         float: left;
         padding: 15px;
         width: 60%;
@@ -42,7 +42,7 @@
         background: #a9a9a9;
         padding: 15px;
         height: 400px;
-    }
+    }*/
 
     .blue {
         background: blue;
@@ -83,14 +83,6 @@
 
     body {
         font-family: Arial, Helvetica, sans-serif;
-    }
-
-    (max-width: 600px) {
-        cours, tables, rooms,doc
-
-    {
-        width: 100%;
-        height: auto;
     }
 </style>
 
@@ -159,96 +151,6 @@
 @if (Model.IsEditMode)
 {
     <hr />
-    <section>
-        <tables>
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <table id="mytable" width="100%" border="1" cellpadding="2" cellspacing="2" style="background-color: #ffffff;">
-                        <tr>
-                            <td></td>
-                            @foreach (var time in times)
-                            {
-                                <td>@time</td>
-                            }
-                        </tr>
-                        @for (int d = 0; d < days.Count; d++)
-                        {
-                            <tr>
-                                <td><h2>@days[d]</h2></td>
-                                @for (int t = 0; t < times.Count; t++)
-                                {
-                                    int id = times.Count * d + t;
-                                    <td id="@id" onclick="merge(this)"></td>
-                                }
-                            </tr>
-                        }
-                    </table>
-
-                </div>
-            </div>
-        </tables>
-        <cours>
-
-            <table id="cours" class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th colspan="3">Cours</th>
-                    </tr>
-                    <tr>
-                        <th>Name </th>
-                        <th>Code</th>
-                        <th>Hours</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-
-
-
-
-        </cours>
-        <rooms>
-
-            <table id="rooms" class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th>Room</th>
-
-                    </tr>
-                    <tr>
-                        <th>Name </th>
-                    </tr>
-                </thead>
-            </table>
-        </rooms>
-        <doc>
-            <table id="doc" class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th>doc</th>
-
-                    </tr>
-                    <tr>
-                        <th>Name </th>
-                    </tr>
-
-
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-
-
-
-
-        </doc>
-    </section>
-    <br />
-    <br />
-
-    <hr />
-    <br />
 
     <div class="row">
         <div class="col-lg-2 col-md-2 col-sm-2">
@@ -266,8 +168,82 @@
                 <span class="glyphicon glyphicon-check"></span> Update Schedule
             </button>
         </div>
-
     </div>
+
+    <br />
+
+    <div class="row mks-section">
+        <div class="col-lg-8 col-md-8 col-sm-8">
+            <table id="mytable" width="100%" border="1" cellpadding="2" cellspacing="2" style="background-color: #ffffff;">
+                <tr>
+                    <td></td>
+                    @foreach (var time in times)
+                    {
+                        <td>@time</td>
+                    }
+                </tr>
+                @for (int d = 0; d < days.Count; d++)
+                {
+                    <tr>
+                        <td><h2>@days[d]</h2></td>
+                        @for (int t = 0; t < times.Count; t++)
+                        {
+                            int id = times.Count * d + t;
+                            <td id="@id" onclick="merge(this)"></td>
+                        }
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-1">
+            <table id="rooms" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Room</th>
+
+                    </tr>
+                    <tr>
+                        <th>Name </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-1">
+            <table id="doc" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>doc</th>
+                    </tr>
+                    <tr>
+                        <th>Name </th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2">
+            <table id="cours" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th colspan="3">Cours</th>
+                    </tr>
+                    <tr>
+                        <th>Name </th>
+                        <th>Code</th>
+                        <th>Hours</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br />
+    <br />
+
+    <hr />
+    <br />
 
     <hr />
 
