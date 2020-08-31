@@ -12,6 +12,56 @@
         border-collapse: collapse;
     }
 
+    tables {
+        float: left;
+        padding: 15px;
+        width: 60%;
+        background-color: #f1f1f1;
+        height: 400px;
+    }
+
+    cours {
+        float: right;
+        width: 20%;
+        background: #f1f1f1;
+        padding: 15px;
+        height: 400px;
+    }
+
+    rooms {
+        float: right;
+        width: 10%;
+        background: #a9a9a9;
+        padding: 15px;
+        height: 400px;
+    }
+
+    doc {
+        float: right;
+        width: 10%;
+        background: #a9a9a9;
+        padding: 15px;
+        height: 400px;
+    }
+
+    .blue {
+        background: blue;
+    }
+
+    .lightblue {
+        background: lightblue;
+    }
+
+    .red {
+        background: red;
+    }
+
+
+    .white {
+        background: white;
+    }
+
+
     th {
         background: #a9a9a9;
     }
@@ -26,12 +76,29 @@
         box-shadow: 1px 1px 3px #FBFCFD;
         font-size: 12px;
     }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    (max-width: 600px) {
+        cours, tables, rooms,doc
+
+    {
+        width: 100%;
+        height: auto;
+    }
 </style>
 
 <h2>@Model.Title</h2>
 
 @using (Html.BeginForm("Save", "Schedules"))
 {
+
     <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-4">
             <div class="form-group">
@@ -61,6 +128,7 @@
             </div>
         </div>
     </div>
+
     @Html.HiddenFor(s => s.ID)
     @Html.AntiForgeryToken()
 
@@ -86,63 +154,103 @@
     </div>
 }
 
+
+
 @if (Model.IsEditMode)
 {
     <hr />
-
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12">
-            <table id="mytable" width="100%" border="1" cellpadding="2" cellspacing="2" style="background-color: #ffffff;">
-                <tr>
-                    <td></td>
-                    @foreach (var time in times)
-                    {
-                        <td>@time</td>
-                    }
-                </tr>
-                @for (int d = 0; d < days.Count; d++)
-                {
-                    <tr>
-                        <td><h2>@days[d]</h2></td>
-                        @for (int t = 0; t < times.Count; t++)
+    <section>
+        <tables>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <table id="mytable" width="100%" border="1" cellpadding="2" cellspacing="2" style="background-color: #ffffff;">
+                        <tr>
+                            <td></td>
+                            @foreach (var time in times)
+                            {
+                                <td>@time</td>
+                            }
+                        </tr>
+                        @for (int d = 0; d < days.Count; d++)
                         {
-                            int id = times.Count * d + t;
-                            <td id="@id" onclick="merge(this)"></td>
+                            <tr>
+                                <td><h2>@days[d]</h2></td>
+                                @for (int t = 0; t < times.Count; t++)
+                                {
+                                    int id = times.Count * d + t;
+                                    <td id="@id" onclick="merge(this)"></td>
+                                }
+                            </tr>
                         }
-                    </tr>
-                }
-            </table>
-        </div>
-    </div>
+                    </table>
 
+                </div>
+            </div>
+        </tables>
+        <cours>
+
+            <table id="cours" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th colspan="3">Cours</th>
+                    </tr>
+                    <tr>
+                        <th>Name </th>
+                        <th>Id</th>
+                        <th>Hours</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+
+
+
+        </cours>
+        <rooms>
+
+            <table id="rooms" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Room</th>
+
+                    </tr>
+                    <tr>
+                        <th>Name </th>
+                    </tr>
+                </thead>
+            </table>
+        </rooms>
+        <doc>
+            <table id="doc" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>doc</th>
+
+                    </tr>
+                    <tr>
+                        <th>Name </th>
+                    </tr>
+
+
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+
+
+
+        </doc>
+    </section>
     <br />
+    <br />
+
+    <hr />
     <br />
 
     <div class="row">
-        <div class="col-lg-2 col-md-2 col-sm-2">
-            <div class="form-group">
-                @Html.DropDownList("courses",
-                    new SelectList(Model.Courses, "Id", "Code"),
-                    "Select Course",
-                    new { @class = "form-control", @id = "coursesDropDownList" })
-            </div>
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-2">
-            <div class="form-group">
-                @Html.DropDownList("teachers",
-                    new SelectList(Model.Teachers, "Name", "Name"),
-                    null,
-                    new { @class = "form-control", @id = "teachersDropDownList" })
-            </div>
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-2">
-            <div class="form-group">
-                @Html.DropDownList("rooms",
-                    new SelectList(Model.Rooms, "Name", "Name"),
-                    null,
-                    new { @class = "form-control", @id = "roomsDropDownList" })
-            </div>
-        </div>
         <div class="col-lg-2 col-md-2 col-sm-2">
             <button type="button" class="btn btn-primary" onclick="mergeHighlighted()">
                 <span class="glyphicon glyphicon-plus"></span> Add class
@@ -158,20 +266,108 @@
                 <span class="glyphicon glyphicon-check"></span> Update Schedule
             </button>
         </div>
+
     </div>
 
     <hr />
+
 }
+
 
 @section scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
+
+        var n = 0;
+        var p = 0;
+        var q = 0;
+        $(document).ready(function () {
+            var tableDoc = $("#doc").DataTable({
+                "bPaginate": false,
+                "bInfo": false,
+                "searching": false,
+                ajax: {
+                    url: "/api/teachers",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function (name, type, doc) {
+                            return '<span onclick="lightblue(this, \'magenta\')">' + name + '</span>';
+                            }
+                        }
+                ]
+            });
+        });
+
+        $(document).ready(function () {
+            var tableRooms = $("#rooms").DataTable({
+                "bPaginate": false,
+                "bInfo": false,
+                "searching": false,
+                ajax: {
+                    url: "/api/rooms",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function (name, type, rooms) {
+
+                            return '<span onclick="red(this, \'blue\')">' + name + '</span>';
+
+
+                            }
+                        }
+                ]
+            });
+        });
+        $(document).ready(function () {
+            var model = @Html.Raw(Json.Encode(Model));
+
+            var tableCours = $("#cours").DataTable({
+                "bPaginate": false,
+                "bInfo": false,
+                "searching": false,
+                ajax: {
+                    url: "/api/courses?departmentId="+model.DepartmentId + "&semester=" + model.Semester,
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "code",
+                        render: function (name, type, cours) {
+                            return '<span onclick="blue(this, \'lightblue\')">' + name + '</span>';
+                        }
+                    },
+                    {
+                        data: "name",
+                        render: function (name, type, cours) {
+                            return '<span onclick="blue(this, \'lightblue\')">' + name + '</span>';
+                        }
+                    },
+                    {
+                        data: "hours",
+                        render: function (name, type, cours) {
+                            return '<span onclick="blue(this, \'lightblue\')">' + name + '</span>';
+                        },
+                    }
+                ]
+            });
+        });
         $(document).ready(function () {
             var model = @Html.Raw(Json.Encode(Model));
             var timesCount = @times.Count;
             var daysCount = @days.Count;
+
+            if (model.IsEditMode) {
+                $("#semesterDropDownList").attr("disabled", "disabled");
+                $("#departmentsDropDownList").attr("disabled", "disabled");
+                $("#name").attr("disabled", "disabled");
+            }
 
             loadSchedule(model, timesCount);
 
@@ -335,6 +531,34 @@
             o.style.backgroundColor = "yellow";
         }
 
+        function blue(o, color) {
+            var cb = document.getElementsByClassName("blue");
+            for (var i = 0; i < cb.length; i++) {
+                $(cb[i]).closest('tr').children('td, th').removeClass("blue");
+                //$(cb[i]).closest('tr').children('td, th').addClass("white");
+            }
+            $(o).closest('tr').children('td, th').addClass("blue");
+            //$(o).closest('td').css('background-color', 'yellow');
+        }
+        function lightblue(o, color) {
+            var cl = document.getElementsByClassName("lightblue");
+            for (var i = 0; i < cl.length; i++) {
+                $(cl[i]).closest('tr').children('td, th').removeClass("lightblue");
+                //$(cl[i]).closest('tr').children('td, th').addClass("white");
+            }
+            $(o).closest('tr').children('td, th').addClass("lightblue");
+            //$(o).closest('td').css('background-color', 'yellow');
+        }
+        function red(o, color) {
+            var cr = document.getElementsByClassName("red");
+            for (var i = 0; i < cr.length; i++) {
+                $(cr[i]).closest('tr').children('td, th').removeClass("red");
+                //$(cr[i]).closest('tr').children('td, th').addClass("white");
+            }
+            $(o).closest('tr').children('td, th').addClass("red");
+            //$(o).closest('td').css('background-color', 'yellow');
+        }
+
         function mergeHighlighted() {
             var tds = document.getElementsByTagName("td");
             var firstCellId = "";
@@ -383,11 +607,16 @@
             }
 
             var firstCell = document.getElementById(firstCellId);
-            firstCell.textContent = $("#coursesDropDownList").val() + ', ' + $("#teachersDropDownList").val() + ', ' + $("#roomsDropDownList").val();
+            var colorblue = document.getElementsByClassName("blue");
+            var color2 = document.getElementsByClassName("lightblue");
+            var color3= document.getElementsByClassName("red");
+            firstCell.textContent = colorblue[0].textContent + ', ' + color2[0].textContent + ', ' + color3[0].textContent;
+            //colorblue[1] = colorblue[1]+ 1;
             firstCell.style.color = 'white';
             firstCell.style.fontWeight = 'bold';
             firstCell.style.backgroundColor = "green";
             m = 0;
         }
+
     </script>
 }
