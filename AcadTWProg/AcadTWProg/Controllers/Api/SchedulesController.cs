@@ -72,7 +72,15 @@ namespace AcadTWProg.Controllers.Api
         [HttpPost]
         public IHttpActionResult UpdateSchedule(int id, string scheduleAsString)
         {
+            int departmentId;
+            int semester;
+
             List<ScheduleData> scheduleDataList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ScheduleData>>(scheduleAsString);
+            if (scheduleDataList == null || scheduleDataList.Count == 0)
+                return BadRequest("Please fill the schedule");
+
+            departmentId = scheduleDataList[0].Schedule.DepartmentId;
+            semester = scheduleDataList[0].Schedule.Semester;
 
             Dictionary<string, int> colspanByCode = new Dictionary<string, int>();
             foreach (var scheduleData in scheduleDataList)
@@ -83,7 +91,9 @@ namespace AcadTWProg.Controllers.Api
             }
 
             CoursesController coursesController = new CoursesController();
-            List<Course> courses = coursesController.GetAllCourses();
+            List<Course> courses = coursesController.GetAllCourses().Where(itm => itm.Semester == semester && itm.DepartmentId == departmentId).ToList();
+
+            List<string> errorMessages = new List<string>();
 
             foreach (var kvp in colspanByCode)
             {
@@ -93,8 +103,17 @@ namespace AcadTWProg.Controllers.Api
 
                 Course course = courses.FirstOrDefault(c => c.Code == code);
                 if (course == null || course.Hours != hours)
-                    return BadRequest();
+                    errorMessages.Add($"{code} course hours are invalid. Used hours: {hours}. Available hours: {course.Hours}");
             }
+
+            foreach (var course in courses)
+            {
+                if (!colspanByCode.ContainsKey(course.Code))
+                    errorMessages.Add($"{course.Code} course is not used.");
+            }
+
+            if (errorMessages.Count > 0)
+                return BadRequest(string.Join("<br>", errorMessages));
 
             var scheduleInDb = _context.Schedules.SingleOrDefault(s => s.ID == id);
             if (scheduleInDb == null)
@@ -109,6 +128,7 @@ namespace AcadTWProg.Controllers.Api
 
             foreach (var scheduleData in scheduleDataList)
             {
+                scheduleData.Schedule = null;
                 _context.ScheduleDatas.Add(scheduleData);
             }
 

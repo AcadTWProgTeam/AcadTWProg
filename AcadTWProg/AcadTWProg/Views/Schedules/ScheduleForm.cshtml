@@ -385,7 +385,11 @@
                         Code: code,
                         TeacherName: teacherName,
                         Room: room,
-                        ScheduleId: model.ID
+                        ScheduleId: model.ID,
+                        Schedule: {
+                            DepartmentId: model.DepartmentId,
+                            Semester: model.Semester
+                        }
                     };
                     scheduleMatrix.push(object);
                 }
@@ -397,8 +401,12 @@
                     success: function () {
                         window.location.replace("/Schedules");
                     },
-                    error: function () {
-                        bootbox.alert("Invalid Schedule !");
+                    error: function (msg) {
+                        console.log(msg.responseJSON.message);
+                        bootbox.alert({
+                            title: "Error",
+                            message: msg.responseJSON.message
+                        });
                     }
                 });
             });
