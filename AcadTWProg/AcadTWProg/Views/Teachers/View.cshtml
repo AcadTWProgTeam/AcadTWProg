@@ -5,8 +5,64 @@
     List<string> times = new List<string>() { "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "1:00", "1:30", "2:00", "2:30", "3:00", "3:30", "4:00", "4:30", "5:00" };//, "5:30", "6:00", "6:30", "7:00", "7:30", "8:00" };
     List<string> days = new List<string>() { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
 }
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+    }
 
+    th {
+        background: #a9a9a9;
+    }
 
+    td, th {
+        background: #FBFCFD;
+        border: 1px solid #dddddd;
+        text-align: center;
+        font-family: monospace;
+        -moz-box-shadow: 1px 1px 3px #FBFCFD;
+        -webkit-box-shadow: 1px 1px 3px #FBFCFD;
+        box-shadow: 1px 1px 3px #FBFCFD;
+        font-size: 12px;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+</style>
+
+<div class="form-group">
+    @Html.LabelFor(r => r.Name)
+    @Html.TextBoxFor(r => r.Name, new { @class = "form-control" })
+</div>
+<br />
+
+<div class="row mks-section">
+    <table id="mytable" width="100%" border="1" cellpadding="2" cellspacing="2" style="background-color: #ffffff;">
+        <tr>
+            <td></td>
+            @foreach (var time in times)
+            {
+                <td>@time</td>
+            }
+        </tr>
+        @for (int d = 0; d < days.Count; d++)
+        {
+            <tr>
+                <td><h2>@days[d]</h2></td>
+                @for (int t = 0; t < times.Count; t++)
+                {
+                    int id = times.Count * d + t;
+                    <td id="@id"></td>
+                }
+            </tr>
+        }
+    </table>
+</div>
 
 @section scripts
 {

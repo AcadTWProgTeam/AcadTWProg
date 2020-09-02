@@ -5,14 +5,79 @@
     List<string> times = new List<string>() { "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "1:00", "1:30", "2:00", "2:30", "3:00", "3:30", "4:00", "4:30", "5:00" };//, "5:30", "6:00", "6:30", "7:00", "7:30", "8:00" };
     List<string> days = new List<string>() { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
 }
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+    }
 
+    th {
+        background: #a9a9a9;
+    }
 
+    td, th {
+        background: #FBFCFD;
+        border: 1px solid #dddddd;
+        text-align: center;
+        font-family: monospace;
+        -moz-box-shadow: 1px 1px 3px #FBFCFD;
+        -webkit-box-shadow: 1px 1px 3px #FBFCFD;
+        box-shadow: 1px 1px 3px #FBFCFD;
+        font-size: 12px;
+    }
 
-@section scripts
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-image: url("room.jpg");
+    }
+</style>
+<img src="room.jpg" alt="room" width="500" height="333">
+    <br />
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(r => r.Name)
+        @Html.TextBoxFor(r => r.Name, new { @class = "form-control", @id = "name" })
+        @Html.ValidationMessageFor(s => s.Name)
+    </div>
+    <br />
+
+    <div class="row mks-section">
+        <table id="mytable" width="100%" border="1" cellpadding="2" cellspacing="2" style="background-color: #ffffff;">
+            <tr>
+                <td></td>
+                @foreach (var time in times)
+                {
+                    <td>@time</td>
+                }
+            </tr>
+            @for (int d = 0; d < days.Count; d++)
+            {
+                <tr>
+                    <td><h2>@days[d]</h2></td>
+                    @for (int t = 0; t < times.Count; t++)
+                    {
+                        int id = times.Count * d + t;
+                        <td id="@id"></td>
+                    }
+                </tr>
+            }
+        </table>
+
+    </div>
+
+    @section scripts
 {
-    @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/bundles/jqueryval")
 
-    <script>
+        <script>
+        if (model.IsEditMode) {
+            $("name").attr("disabled", "disabled");
+        }
+
         $(document).ready(function () {
             loadRoomInfos();
         });
@@ -23,7 +88,7 @@
             var daysCount = @days.Count;
 
             $.ajax({
-                url: "/api/ScheduleDatas/GetRoomInfos?room=" + model.Name,
+                url: "/api/ScheduleDatas/GetRoomInfos?room=" + $("#roomsDropDownList").val(),
                 method: "GET",
                 success: function (data) {
                     console.log(data);
@@ -36,6 +101,33 @@
                     }
                 }
             });
-        }
-    </script>
-}
+                }
+                function loadSchedule(model, timesCount) {
+                    var scheduleMatrix = JSON.parse(model.ScheduleData);
+                    if (scheduleMatrix == undefined || scheduleMatrix.length == 0)
+                        return;
+
+                    for (var i = 0; i < scheduleMatrix.length; i++) {
+                        var scheduleData = scheduleMatrix[i];
+                        var id = scheduleData.Day * timesCount + scheduleData.Time;
+                        var colspan = scheduleData.ColSpan;
+                        var code = scheduleData.Code;
+                        var teacherName = scheduleData.TeacherName;
+                        var room = scheduleData.Room;
+
+                        var firstCell = document.getElementById(id);
+                        firstCell.colSpan = colspan;
+                        firstCell.textContent = code + ', ' + teacherName + ', ' + room;
+                        firstCell.style.color = 'white';
+                        firstCell.style.fontWeight = 'bold';
+                        firstCell.style.backgroundColor = "green";
+
+                        for (var j = id + 1; j < id + colspan; j++) {
+                            var otherCell = document.getElementById(j);
+                            otherCell.style.display = "none";
+                            otherCell.textContent = "";
+                        }
+                    }
+                }
+        </script>
+    }
