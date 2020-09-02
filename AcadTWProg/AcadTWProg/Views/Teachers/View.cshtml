@@ -35,10 +35,9 @@
     }
 </style>
 
-<div class="form-group">
-    @Html.LabelFor(r => r.Name)
-    @Html.TextBoxFor(r => r.Name, new { @class = "form-control" })
-</div>
+<br />
+<br />
+<h2>@Model.Name</h2>
 <br />
 
 <div class="row mks-section">
@@ -87,8 +86,23 @@
                         var colSpan = data[i].colSpan;
                         var time = data[i].time;
                         var day = data[i].day;
+                        var id = day * timesCount + time;
+                        var code = data[i].code;
+                        var teacherName = data[i].teacherName;
+                        var room = data[i].room;
 
+                        var firstCell = document.getElementById(id);
+                        firstCell.colSpan = colSpan;
+                        firstCell.textContent = code + ', ' + teacherName + ', ' + room;
+                        firstCell.style.color = 'white';
+                        firstCell.style.fontWeight = 'bold';
+                        firstCell.style.backgroundColor = "green";
 
+                        for (var j = id + 1; j < id + colSpan; j++) {
+                            var otherCell = document.getElementById(j);
+                            otherCell.style.display = "none";
+                            otherCell.textContent = "";
+                        }
                     }
                 }
             });
