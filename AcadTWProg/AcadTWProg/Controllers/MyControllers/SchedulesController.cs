@@ -72,6 +72,8 @@ namespace AcadTWProg.Controllers.MyControllers
         [ValidateAntiForgeryToken]
         public ActionResult Save(Schedule schedule)
         {
+            schedule.DepartmentId = AccountViewModel.GetDepartmentId();
+
             if (!ModelState.IsValid)
             {
                 var departments = _context.Departments.ToList();

@@ -12,38 +12,6 @@
         border-collapse: collapse;
     }
 
-    /*tables {
-        float: left;
-        padding: 15px;
-        width: 60%;
-        background-color: #f1f1f1;
-        height: 400px;
-    }
-
-    cours {
-        float: right;
-        width: 20%;
-        background: #f1f1f1;
-        padding: 15px;
-        height: 400px;
-    }
-
-    rooms {
-        float: right;
-        width: 10%;
-        background: #a9a9a9;
-        padding: 15px;
-        height: 400px;
-    }
-
-    doc {
-        float: right;
-        width: 10%;
-        background: #a9a9a9;
-        padding: 15px;
-        height: 400px;
-    }*/
-
     .blue {
         background: blue;
     }
@@ -100,7 +68,7 @@
                 @Html.ValidationMessageFor(s => s.Name)
             </div>
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-4">
+        <div class="col-lg-4 col-md-4 col-sm-4" id="departmentsDropDownListSection">
             <div class="form-group">
                 @Html.LabelFor(s => s.DepartmentId)
                 @Html.DropDownListFor(s => s.DepartmentId,
@@ -340,6 +308,7 @@
             var timesCount = @times.Count;
             var daysCount = @days.Count;
 
+            $("#departmentsDropDownListSection").attr("style", "display: none;");
             if (model.IsEditMode) {
                 $("#semesterDropDownList").attr("disabled", "disabled");
                 $("#departmentsDropDownList").attr("disabled", "disabled");

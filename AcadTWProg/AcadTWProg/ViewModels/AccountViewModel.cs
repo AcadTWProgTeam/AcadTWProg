@@ -12,6 +12,12 @@ namespace AcadTWProg.ViewModels
         protected static ApplicationDbContext ApplicationDbContext = new ApplicationDbContext();
         protected static UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ApplicationDbContext));
 
+        public static int GetDepartmentId()
+        {
+            ApplicationUser user = UserManager.FindById(HttpContext.Current.User.Identity.GetUserId());
+            return user.DepartmentId;
+        }
+
         public static string GetDepartmentName()
         {
             ApplicationUser user = UserManager.FindById(HttpContext.Current.User.Identity.GetUserId());

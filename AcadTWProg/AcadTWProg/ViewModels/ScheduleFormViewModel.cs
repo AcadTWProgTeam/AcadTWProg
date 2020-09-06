@@ -37,13 +37,14 @@ namespace AcadTWProg.ViewModels
         public ScheduleFormViewModel()
         {
             ID = 0;
+            DepartmentId = AccountViewModel.GetDepartmentId();
         }
 
         public ScheduleFormViewModel(Schedule schedule)
         {
             ID = schedule.ID;
             Name = schedule.Name;
-            DepartmentId = schedule.DepartmentId;
+            DepartmentId = AccountViewModel.GetDepartmentId();//schedule.DepartmentId;
             Semester = schedule.Semester;
             ScheduleData = schedule.ScheduleData;
         }
