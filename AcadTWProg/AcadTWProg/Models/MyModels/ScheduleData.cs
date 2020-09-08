@@ -16,6 +16,12 @@
 
         public string Room { get; set; }
 
+        public int CourseId { get; set; }
+
+        public int TeacherId { get; set; }
+
+        public int RoomId { get; set; }
+
         public Schedule Schedule { get; set; }
 
         public int ScheduleId { get; set; }

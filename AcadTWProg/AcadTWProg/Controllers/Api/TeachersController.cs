@@ -3,6 +3,7 @@ using AcadTWProg.Models.Dtos;
 using AcadTWProg.Models.MyModels;
 using AutoMapper;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
@@ -81,6 +82,12 @@ namespace AcadTWProg.Controllers.Api
             _context.Teachers.Remove(teacherInDb);
             _context.SaveChanges();
             return Ok();
+        }
+
+        [Route("api/Teachers/GetAllTeachers")]
+        public List<Teacher> GetAllTeachers()
+        {
+            return _context.Teachers.ToList();
         }
     }
 }

@@ -93,6 +93,12 @@ namespace AcadTWProg.Controllers.Api
             CoursesController coursesController = new CoursesController();
             List<Course> courses = coursesController.GetAllCourses().Where(itm => itm.Semester == semester && itm.DepartmentId == departmentId).ToList();
 
+            TeachersController teachersController = new TeachersController();
+            List<Teacher> teachers = teachersController.GetAllTeachers();
+
+            RoomsController roomsController = new RoomsController();
+            List<Room> rooms = roomsController.GetAllRooms();
+
             List<string> errorMessages = new List<string>();
 
             foreach (var kvp in colspanByCode)
@@ -130,6 +136,9 @@ namespace AcadTWProg.Controllers.Api
             {
                 scheduleData.Schedule = null;
                 _context.ScheduleDatas.Add(scheduleData);
+                scheduleData.CourseId = courses.First(itm => itm.Code == scheduleData.Code).ID;
+                scheduleData.TeacherId = teachers.First(itm => itm.Name == scheduleData.TeacherName).ID;
+                scheduleData.RoomId = rooms.First(itm => itm.Name == scheduleData.Room).ID;
             }
 
             _context.SaveChanges();

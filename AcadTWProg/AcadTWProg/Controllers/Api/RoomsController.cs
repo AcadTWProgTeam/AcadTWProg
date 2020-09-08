@@ -85,5 +85,11 @@ namespace AcadTWProg.Controllers.Api
             _context.SaveChanges();
             return Ok();
         }
+
+        [Route("api/Rooms/GetAllRooms")]
+        public List<Room> GetAllRooms()
+        {
+            return _context.Rooms.ToList();
+        }
     }
 }
